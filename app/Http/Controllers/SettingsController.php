@@ -15,6 +15,16 @@ class SettingsController extends Controller
             'settings' => $settings
         ]);
 
-        dd($settings);
+    }
+
+    public function insert(Request $request)
+    {
+        $settings = new Settings;
+
+        $settings->service_name = $request->service_name;
+        $settings->data = $request->key;
+        $settings->save();
+
+        return redirect()->route('settings');
     }
 }
