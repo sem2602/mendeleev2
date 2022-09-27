@@ -6,21 +6,30 @@
         <div class="card">
             <div class="card-header">Налаштування</div>
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card-body">
                 <div class="row justify-content-center">
 
                     <div class="col-sm-12 col-md-10 col-lg-8">
 
-
-                        <div class="mb-3 p-3 border border-info">
-                            <label class="form-label">Service name</label>
-                            <div class="d-flex align-items-center">
-                                <input name="api" type="text" class="form-control">
-                                <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Видалити</button>
-                                <!--                        <button class="ms-2 p-0 border-0" href="#"><img src="icons/x-circle-fill.svg" width="32" height="32" alt=""></button>-->
+                        @foreach($settings as $setting)
+                            <div class="mb-3 p-3 border border-info">
+                                <label class="form-label">{{ $setting->name }} | {{ $setting->key }}</label>
+                                <div class="d-flex align-items-center">
+                                    <input type="text" class="form-control" value="{{ $setting->value }}" disabled>
+                                    <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Видалити</button>
+                                </div>
                             </div>
-                        </div>
-
+                        @endforeach
 
                         <div class="mb-3">
                             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#addModal">Додати сервіс</button>
@@ -60,6 +69,10 @@
         <div class="modal-dialog">
             <div class="modal-content border border-info rounded">
 
+
+
+
+
                 <form action="{{ route('settings.add') }}" method="POST">
 
                     @csrf
@@ -93,7 +106,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Значення сервісу</label>
-                            <input name="value" type="text" class="form-control">
+                            <input name="value" type="text" class="form-control" required>
                         </div>
 
                     </div>
