@@ -58,27 +58,49 @@
     <!-- addModal -->
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content border border-info rounded">
 
                 <form action="{{ route('settings.add') }}" method="POST">
 
                     @csrf
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="addModalLabel">Додати значення сервісу</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
 
-                        <input name="service_name" type="text">
-                        <input name="key" type="text">
+                        <div class="mb-3">
+                            <label class="form-label">Сервіс</label>
+                            <select name="service" class="form-select">
+                                @foreach($services as $service)
+                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Ключ сервісу</label>
+                            <select name="key" class="form-select">
+                                <option value="login">login</option>
+                                <option value="password">password</option>
+                                <option value="bearer">bearer</option>
+                                <option value="token">token</option>
+                                <option value="api">api</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Значення сервісу</label>
+                            <input name="value" type="text" class="form-control">
+                        </div>
 
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-primary">Додати значення</button>
                     </div>
 
                 </form>

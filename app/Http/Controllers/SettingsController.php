@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Services;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,12 @@ class SettingsController extends Controller
 {
     public function index()
     {
+        $services = Services::all();
         $settings = Settings::all();
 
         return view('settings', [
-            'settings' => $settings
+            'settings' => $settings,
+            'services' => $services
         ]);
 
     }
