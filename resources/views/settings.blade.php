@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title')Налаштування@endsection
+
 @section('content')
     <div class="container">
 
