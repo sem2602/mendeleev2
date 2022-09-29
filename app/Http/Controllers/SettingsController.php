@@ -36,9 +36,9 @@ class SettingsController extends Controller
 
         $settings = new Settings;
 
-        $settings->service_id = $data->service;
-        $settings->key = $data->key;
-        $settings->value = $data->value;
+        $settings->service_id = $data['service'];
+        $settings->key = $data['key'];
+        $settings->value = $data['value'];
         $settings->save();
 
         return redirect()->route('settings');
