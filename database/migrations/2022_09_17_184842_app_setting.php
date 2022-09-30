@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('service_id');
             $table->string('key');
+            $table->string('setting_name')->default(null);
             $table->string('value');
             $table->timestamps();
         });

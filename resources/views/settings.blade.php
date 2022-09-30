@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
 
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">Налаштування</div>
 
             @if ($errors->any())
@@ -26,6 +26,7 @@
                         @foreach($settings as $setting)
                             <div class="mb-3 p-3 border border-info">
                                 <label class="form-label">{{ $setting->name }} | {{ $setting->key }}</label>
+                                <span class="text-success ms-5">{{ $setting->setting_name }}</span>
                                 <div class="d-flex align-items-center">
                                     <input type="text" class="form-control" value="{{ $setting->value }}" disabled>
                                     <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">Видалити</button>
@@ -109,6 +110,11 @@
                         <div class="mb-3">
                             <label class="form-label">Значення сервісу</label>
                             <input name="value" type="text" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">І'мя (не обов'язково)</label>
+                            <input name="name" type="text" class="form-control">
                         </div>
 
                     </div>

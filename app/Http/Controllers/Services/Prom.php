@@ -48,6 +48,14 @@ class Prom {
 
     }
 
+    function paymentOptions(){
+
+        $url = '/api/v1/payment_options/list';
+        $method = 'GET';
+        return $this->make_request($method, $url, NULL);
+
+    }
+
     function getProductById($product_id) {
         $url = '/api/v1/products/'.$product_id;
         $method = 'GET';

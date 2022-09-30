@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Services;
 
-define('HOST', 'https://panel.mendeleevmarket.com/api/');
-
 class Opencart
 {
+
+    private $host = 'https://panel.mendeleevmarket.com/api/';
 
     function __construct($token) {
         $this->token = $token;
@@ -17,8 +17,8 @@ class Opencart
         );
 
         $ch = curl_init();
-        // curl_setopt($ch, CURLOPT_URL, 'https://' . HOST . $url);
-        curl_setopt($ch, CURLOPT_URL, HOST . $url);
+        // curl_setopt($ch, CURLOPT_URL, 'https://' . $this->host . $url);
+        curl_setopt($ch, CURLOPT_URL, $this->host . $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         if (strtoupper($method) == 'POST') {

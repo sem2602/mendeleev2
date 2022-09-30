@@ -5,15 +5,75 @@
 @section('content')
 <div class="container">
 
-    <div class="card">
+    <div class="card shadow">
         <div class="card-header">Замовлення з сайтів</div>
 
         <div class="card-body">
 
+            @if(!empty($orders))
+                <table class="table table-hover align-middle">
 
-            {{ __('You are logged in!') }}
+                    <thead class="table-info">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Замовник</th>
+                        <th scope="col">Телефон</th>
+                        <th scope="col">Сума</th>
+                        <th scope="col">Оплата</th>
+                        <th scope="col">Створений</th>
+                        <th scope="col">Дії</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    @foreach($orders as $order)
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex">
+                                    <div>
+                                        @if($order['service_id'] == 2)
+                                            <i class="prom-icon-17"></i>
+                                        @elseif($order['service_id'] == 1)
+                                            <i class="mm-icon-17"></i>
+                                        @endif
+                                    </div>
+
+                                    <div class="d-flex flex-column ms-1">
+                                        <small>{{ $order['service_name'] }}</small>
+                                        <span>{{ $order['id'] }}</span>
+                                    </div>
+
+                                </div>
+
+                            </th>
+
+                            <td>{{ $order['client_first_name'] }} {{ $order['client_last_name'] }}</td>
+                            <td>{{ $order['phone'] }}</td>
+                            <td>{{ $order['price'] }}</td>
+                            <td>{{ $order['payment_type'] }}</td>
+                            <td>{{ $order['created'] }}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm">
+                                    <i class="bi-check"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm btn-cancel">
+                                    <i class="bi-x-circle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+
+                </table>
+            @else
+                <div class="alert alert-info" role="alert">
+                    Замовлення на даний час відсутні!
+                </div>
+            @endif
+
         </div>
     </div>
-
 </div>
 @endsection

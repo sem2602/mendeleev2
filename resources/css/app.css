@@ -1,0 +1,15 @@
+.mm-icon-17 {
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    background: url(../img/mm.svg) 0% 0% / 17px;
+}
+
+.prom-icon-17 {
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    background: url(../img/prom.svg) 0% 0% / 17px;
+}
