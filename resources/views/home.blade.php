@@ -59,10 +59,19 @@
                             </td>
                             <td>{{ $order['created'] }}</td>
                             <td class="text-nowrap">
-                                <button class="btn btn-success btn-sm">
-                                    <i class="bi-check"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm btn-cancel">
+
+                                @if($order['service_id'] == 1)
+                                    <a href="/order.accept.site/{{ $order['id'] }}" class="btn btn-success btn-sm">
+                                        <i class="bi-check"></i>
+                                    </a>
+                                @else
+                                    <a href="/order.accept.prom/{{ $order['id'] }}" class="btn btn-success btn-sm">
+                                        <i class="bi-check"></i>
+                                    </a>
+                                @endif
+
+
+                                <button class="btn btn-danger btn-sm">
                                     <i class="bi-x-circle"></i>
                                 </button>
                             </td>
