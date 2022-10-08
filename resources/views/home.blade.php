@@ -65,7 +65,7 @@
                                         <i class="bi-check"></i>
                                     </a>
                                 @else
-                                    <a href="/order.accept.prom/{{ $order['id'] }}" class="btn btn-success btn-sm">
+                                    <a href="/order.accept.prom/{{ $order['api_id'] }}/{{ $order['id'] }}" class="btn btn-success btn-sm">
                                         <i class="bi-check"></i>
                                     </a>
                                 @endif

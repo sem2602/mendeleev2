@@ -40,6 +40,15 @@ class Prom {
         return json_decode($result, true);
     }
 
+    function getOrder($id){
+
+        $url = '/api/v1/orders/';
+        $url .= $id;
+        $method = 'GET';
+        return $this->make_request($method, $url, NULL);
+
+    }
+
     function getPendingOrders(){
 
         $url = '/api/v1/orders/list?status=pending';
