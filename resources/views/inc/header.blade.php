@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar-brand ms-3">
                     <span href="/">MendeleevPanel</span>
-                    <small>v2.0</small>
+                    <sup>v2.0</sup>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

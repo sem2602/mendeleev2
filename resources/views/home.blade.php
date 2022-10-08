@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
 
-    <div class="card shadow">
+    <div class="card shadow overflow-auto">
         <div class="card-header">Замовлення з сайтів</div>
 
         <div class="card-body">
@@ -50,10 +50,15 @@
 
                             <td>{{ $order['client_first_name'] }} {{ $order['client_last_name'] }}</td>
                             <td>{{ $order['phone'] }}</td>
-                            <td>{{ $order['price'] }}</td>
-                            <td>{{ $order['payment_type'] }}</td>
+                            <td><em>{{ $order['price'] }}</em></td>
+                            <td class="text-wrap">
+                                {{ $order['payment_type'] }}
+                                @if($order['payment'])
+                                    <br><em class="px-2 bg-success bg-opacity-50">Сплачено!</em>
+                                @endif
+                            </td>
                             <td>{{ $order['created'] }}</td>
-                            <td>
+                            <td class="text-nowrap">
                                 <button class="btn btn-success btn-sm">
                                     <i class="bi-check"></i>
                                 </button>

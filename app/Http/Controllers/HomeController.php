@@ -14,9 +14,8 @@ class HomeController extends Controller
 
         $AllOrders = [];
 
-        $promApis = Settings::where('service_id', 2)->get();
-
         // Prom Orders
+        $promApis = Settings::where('service_id', 2)->get();
         foreach ($promApis as $api){
 
             $prom = new Services\Prom($api->value);
@@ -33,15 +32,8 @@ class HomeController extends Controller
 
         }
 
-        //dd($AllOrders);
-
-        //////////////////////////////////////////////////////
-
-
         // Opencart orders
-
         $opencartApi = Settings::where('service_id', 1)->get();
-
         foreach ($opencartApi as $api){
             $opencart = new Services\Opencart($api->value);
 
@@ -59,12 +51,8 @@ class HomeController extends Controller
 
         }
 
-        /////////////////////////////////////////////////////
+        return view('home', ['orders' => $AllOrders]);
 
-
-        return view('home', [
-            'orders' => $AllOrders
-        ]);
     }
 
     private function convertPromOrder($order){
@@ -81,7 +69,7 @@ class HomeController extends Controller
             'price' => $order['full_price'],
             'payment_type' => $order['payment_option']['name'],
             'payment' => false,
-            'created' => date('d-m-Y, h:i:s', strtotime($order['date_created'])),
+            'created' => date('d.m.Y h:i:s', strtotime($order['date_created'])),
         ];
 
         if(!empty($order['payment_data']['status']) && $order['payment_data']['status'] == 'paid'){
@@ -106,12 +94,8 @@ class HomeController extends Controller
             'price' => (float)$order['total'] . ' грн',
             'payment_type' => $order['payment_method'],
             'payment' => false,
-            'created' => date('d-m-Y, h:i:s', strtotime($order['date_added'])),
+            'created' => date('d.m.Y h:i:s', strtotime($order['date_added'])),
         ];
-
-        if(!empty($order['payment_data']['status']) && $order['payment_data']['status'] == 'paid'){
-            $blank['payment'] = true;
-        }
 
         return $blank;
 
