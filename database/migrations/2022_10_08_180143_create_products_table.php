@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('quantity');
+            $table->float('quantity', 15, 3);
             $table->float('price');
             $table->integer('unit_id');
             $table->timestamps();
