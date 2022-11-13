@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('service_id');
+            $table->foreignId('service_id')->constrained('services');
             $table->string('key');
             $table->string('setting_name')->default(null);
             $table->string('value');

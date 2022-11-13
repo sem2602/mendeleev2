@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('unit_id')->default(1)->constrained('units');
             $table->string('name');
             $table->float('quantity', 15, 3);
             $table->float('price');
-            $table->integer('unit_id');
             $table->timestamps();
         });
     }

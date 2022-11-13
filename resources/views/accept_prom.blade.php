@@ -10,7 +10,8 @@
 
             <div class="card-body">
 
-
+                <span class="text-danger">* </span>
+                <span class="h4">Товари в кошику</span>
 
             </div>
 
