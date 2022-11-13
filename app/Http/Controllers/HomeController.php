@@ -39,7 +39,7 @@ class HomeController extends Controller
 
             $opencartOrders = $opencart->getPendingOrders();
 
-            //dd($opencartOrders);
+//            dd($opencartOrders);
 
             if(!empty($opencartOrders)){
                 foreach ($opencartOrders as $order){
@@ -82,6 +82,8 @@ class HomeController extends Controller
 
     private function convertOpencartOrder($order){
 
+        $paymentType = explode(' ', $order['payment_method']);
+
         $blank = [
             'id' => $order['order_id'],
             'service_id' => 1,
@@ -92,7 +94,7 @@ class HomeController extends Controller
             'email' => $order['email'],
             'phone' => $order['telephone'],
             'price' => (float)$order['total'] . ' грн',
-            'payment_type' => $order['payment_method'],
+            'payment_type' => $paymentType[0] . ' ' . $paymentType[1],
             'payment' => false,
             'created' => date('d.m.Y h:i:s', strtotime($order['date_added'])),
         ];
