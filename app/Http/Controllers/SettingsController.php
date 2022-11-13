@@ -12,11 +12,7 @@ class SettingsController extends Controller
     public function index()
     {
         $services = Services::all();
-
-        $settings = DB::table('settings')
-            ->join('services', 'services.id', '=', 'settings.service_id')
-            ->select('settings.*', 'services.*')
-            ->get();
+        $settings = Settings::all();
 
         return view('settings', [
             'settings' => $settings,

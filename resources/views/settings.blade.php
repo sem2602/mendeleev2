@@ -25,7 +25,7 @@
 
                         @foreach($settings as $setting)
                             <div class="mb-3 p-3 border border-info">
-                                <label class="form-label">{{ $setting->name }} | {{ $setting->key }}</label>
+                                <label class="form-label">{{ $setting->service->name }} | {{ $setting->key }}</label>
                                 <span class="text-success ms-5">{{ $setting->setting_name }}</span>
                                 <div class="d-flex align-items-center">
                                     <input type="text" class="form-control" value="{{ $setting->value }}" disabled>
