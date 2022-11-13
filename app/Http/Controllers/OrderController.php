@@ -51,24 +51,30 @@ class OrderController extends Controller
             $product_id = explode('.', $product['sku']);
             $productInStore = Product::where('id', $product_id[0])->first();
 
-            $productsBlank[$key] = [
-                'id' => $productInStore->id,
-                'prom_id' => $product['id'],
-                'name' => $product['name_multilang']['uk'],
-                'price' => $productInStore->price,
-                'quantity' => $product['quantity'],
-                'is_store' => $productInStore->quantity,
-            ];
+            //dd($productInStore);
+
+            if($productInStore){
+
+                $productsBlank[$key] = [
+                    'id' => $productInStore->id,
+                    'prom_id' => $product['id'],
+                    'name' => $product['name_multilang']['uk'],
+                    'price' => $productInStore->price,
+                    'quantity' => $product['quantity'],
+                    'is_store' => $productInStore->quantity,
+                ];
+
+                if($productInStore->quantity - $product['quantity'] < 0){
+                    $productsBlank[$key]['error'] = 'Недостатьня кількість товару на складі!';
+                    //$order['order']['products'][$key]['available'] = true;
+                }
+
+            }
 
             //dd($product);
 
             if(!$productInStore){
                 $productsBlank[$key]['error'] = 'Товар в системі не знайдено!';
-            }
-
-            if($productInStore->quantity - $product['quantity'] < 0){
-                $productsBlank[$key]['error'] = 'Недостатьня кількість товару на складі!';
-                //$order['order']['products'][$key]['available'] = true;
             }
 
         }
