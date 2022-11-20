@@ -21,21 +21,23 @@ class OrderController extends Controller
     public function acceptProm($api_id, $order_id)
     {
 
-        //dd($api_id);
-
         $api = Settings::findOrFail($api_id);
         $prom = new Prom($api->value);
 
         $order = $prom->getOrder($order_id);
 
+        //dd($order);
+
         $orderBlank = [
             'id' => $order['order']['id'],
-            'service_id' => $api->value,
+            'setting_id' => $api_id,
             'client_first_name' => $order['order']['client_first_name'],
             'client_last_name' => $order['order']['client_last_name'],
             'email' => $order['order']['email'],
             'phone' => $order['order']['phone'],
             'price' => $order['order']['full_price'],
+            'delivery_name' => $order['order']['delivery_option']['name'],
+            'delivery_address' => $order['order']['delivery_address'],
             'payment_type' => $order['order']['payment_option']['name'],
             'payment' => false,
             'created' => date('d.m.Y h:i:s', strtotime($order['order']['date_created'])),
@@ -74,7 +76,7 @@ class OrderController extends Controller
             //dd($product);
 
             if(!$productInStore){
-                $productsBlank[$key]['error'] = 'Товар в системі не знайдено!';
+                $productsBlank[$key]['not_found'] = $product['name_multilang']['uk'];
             }
 
         }

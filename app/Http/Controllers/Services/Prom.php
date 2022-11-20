@@ -57,6 +57,20 @@ class Prom {
 
     }
 
+    function setOrderStatus($order_id, $status) {
+        $url = '/api/v1/orders/set_status';
+        $method = 'POST';
+        $body = [
+            'status' => $status,
+            'ids' => [$order_id],
+        ];
+        if($status === 'canceled'){
+            $body['cancellation_reason'] = 'another';
+            $body['cancellation_text'] = 'відміна з адмін панелі';
+        }
+        return $this->make_request($method, $url, $body);
+    }
+
     function paymentOptions(){
 
         $url = '/api/v1/payment_options/list';
