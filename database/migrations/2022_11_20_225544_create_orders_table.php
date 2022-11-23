@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->integer('ext_id')->nullable();
             $table->foreignId('setting_id')->constrained('settings');
             $table->foreignId('client_id')->constrained('clients');
-            $table->foreignId('delivery_provider_id')->default(0)->constrained('settings');
+            $table->foreignId('delivery_provider_id')->constrained('delivery_providers');
             $table->integer('delivery_provider_ext')->nullable();
-            $table->foreignId('sender_id')->default(0)->constrained('senders');
+            $table->foreignId('sender_id')->constrained('senders');
             $table->string('recipient_city_ref')->nullable();
             $table->string('recipient_city')->nullable();
             $table->text('recipient_address')->nullable();

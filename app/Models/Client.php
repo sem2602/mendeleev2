@@ -18,5 +18,4 @@ class Client extends Model
         'edrpou',
     ];
 
-    use HasFactory;
 }
