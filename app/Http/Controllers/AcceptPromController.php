@@ -3,27 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Services\Prom;
+use App\Models\Client;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AcceptPromController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function __invoke(Request $request)
     {
         $api = Settings::find($request->setting_id)->value;
 
-        //dd($api);
+
 
         $prom = new Prom($api);
 
-        $status = $prom->setOrderStatus($request->order_id, 'pending');
+        $order = $prom->getOrder($request->order_id);
 
-        dd($status);
+        $client = Client::where('phone', $order['order']['phone'])->first();
+
+        //dd($client);
+
+
+
+        //DB::beginTransaction();
+
+        if (!$client){
+            $client = Client::create([
+                'firstname' => $order['order']['client_first_name'],
+                'lastname' => $order['order']['client_last_name'],
+                'middlename' => $order['order']['client_second_name'],
+                'email' => $order['order']['email'],
+                'phone' => $order['order']['phone'],
+            ]);
+
+
+        }
+
+        //dd($client->id);
+
+
+        //$status = $prom->setOrderStatus($request->order_id, 'pending');
+
+        //dd($status);
     }
 }

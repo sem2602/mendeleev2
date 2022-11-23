@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('middlename')->default(null);
-            $table->string('email');
+            $table->string('middlename')->nullable();
+            $table->string('email')->nullable();
             $table->string('phone');
-            $table->string('organization')->default(null);
-            $table->string('edrpou')->default(null);
+            $table->string('organization')->nullable();
+            $table->string('edrpou')->nullable();
 
             $table->timestamps();
         });
