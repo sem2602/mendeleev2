@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(callback: function (){
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -18,8 +18,13 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/order.accept.site/{id}', [\App\Http\Controllers\OrderController::class, 'acceptSite']);
 
-    Route::get('/order.accept.prom/{api_id}/{order_id}', [\App\Http\Controllers\OrderController::class, 'acceptProm']);
+    Route::get('/order.accept.prom/{api_id}/{order_id}', [\App\Http\Controllers\OrderController::class, 'acceptProm'])->name('order.accept.prom');
     Route::post('/order.prom.accept', AcceptPromController::class)->name('order.prom.accept');
+
+    Route::get('/orders/accepted', function() {
+        $orders = \App\Models\Order::where('status_id', 1)->get();
+        dd($orders);
+    });
 
     Route::post('/order.cancel/{id}/{service_id}', [\App\Http\Controllers\HomeController::class, 'cancelOrder']);
 });

@@ -51,16 +51,18 @@ class AcceptPromController extends Controller
         ]);
 
 
-        $status = $prom->setOrderStatus($request->order_id, 'pending');
+        //$status = $prom->setOrderStatus($request->order_id, 'pending');
         $status = 1;
 
         if(isset($status['error'])){
             DB::rollBack();
-            dd($status);
+            return to_route('order.accept.prom', ['api_id' => $request->setting_id, 'order_id' => $order['order']['id']]);
         }
 
         DB::commit();
 
         dd($status);
+
+        return to_route('/home');
     }
 }
