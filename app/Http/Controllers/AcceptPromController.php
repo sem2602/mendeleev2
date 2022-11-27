@@ -32,36 +32,36 @@ class AcceptPromController extends Controller
             ]);
         }
 
-        DB::beginTransaction();
+        if(!Order::where('ext_id', $order['order']['id'])->first()){
+            DB::beginTransaction();
 
-        $createdOrder = Order::create([
-            'ext_id' => $order['order']['id'],
-            'setting_id' => $request->setting_id,
-            'client_id' => $client->id,
-            'delivery_provider_id' => $delivery_provider_id,
-            'delivery_provider_ext' => $order['order']['delivery_option']['id'],
-            'sender_id' => 1,
-            'recipient_city_ref' => $order['order']['delivery_provider_data']['recipient_warehouse_id'],
-            'recipient_address' => $order['order']['delivery_address'],
-            'warehouse_type' => $order['order']['delivery_provider_data']['type'],
-            'payment_id' => $request->payment_id,
-            'total' => (float)str_replace(",",".", preg_replace("/[^,.0-9]/","",$order['order']['full_price'])),
-            'status_id' => 1,
-            'user_id' => auth()->user()->id,
-        ]);
+            $createdOrder = Order::create([
+                'ext_id' => $order['order']['id'],
+                'setting_id' => $request->setting_id,
+                'client_id' => $client->id,
+                'delivery_provider_id' => $delivery_provider_id,
+                'delivery_provider_ext' => $order['order']['delivery_option']['id'],
+                'sender_id' => 1,
+                'recipient_city_ref' => $order['order']['delivery_provider_data']['recipient_warehouse_id'],
+                'recipient_address' => $order['order']['delivery_address'],
+                'warehouse_type' => $order['order']['delivery_provider_data']['type'],
+                'payment_id' => $request->payment_id,
+                'total' => (float)str_replace(",",".", preg_replace("/[^,.0-9]/","",$order['order']['full_price'])),
+                'status_id' => 1,
+                'user_id' => auth()->user()->id,
+            ]);
 
 
-        //$status = $prom->setOrderStatus($request->order_id, 'pending');
-        $status = 1;
+            //$status = $prom->setOrderStatus($request->order_id, 'pending');
+            $status = 1;
 
-        if(isset($status['error'])){
-            DB::rollBack();
-            return to_route('order.accept.prom', ['api_id' => $request->setting_id, 'order_id' => $order['order']['id']]);
+            if(isset($status['error'])){
+                DB::rollBack();
+                return to_route('order.accept.prom', ['api_id' => $request->setting_id, 'order_id' => $order['order']['id']]);
+            }
+
+            DB::commit();
         }
-
-        DB::commit();
-
-        //dd($status);
 
         return to_route('orders.accepted');
     }
