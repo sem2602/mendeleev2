@@ -31,6 +31,9 @@ Route::middleware('auth')->group(callback: function (){
     Route::get('order/confirm/{id}', [])->name('confirm.order');
 
     Route::post('/order.cancel/{id}/{service_id}', [\App\Http\Controllers\HomeController::class, 'cancelOrder']);
+
+    Route::resource('clients', \App\Http\Controllers\ClientController::class);
+
 });
 
 
