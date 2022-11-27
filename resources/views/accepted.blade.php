@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title')Головна@endsection
+@section('title')Прийняті замовлення@endsection
 
 @section('content')
     <div class="container">
@@ -17,10 +17,10 @@
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Замовник</th>
-                            <th scope="col">Телефон</th>
+                            <th scope="col">Доставка</th>
+                            <th scope="col">Тип платежу</th>
                             <th scope="col">Сума</th>
-                            <th scope="col">Оплата</th>
-                            <th scope="col">Створений</th>
+                            <th scope="col">Прийнятий</th>
                             <th scope="col">Дії</th>
                         </tr>
                         </thead>
@@ -32,49 +32,53 @@
                                 <th scope="row">
                                     <div class="d-flex">
                                         <div>
-                                            @if($order['service_id'] == 2)
+                                            @if($order->setting_id == 2)
                                                 <i class="prom-icon-17"></i>
-                                            @elseif($order['service_id'] == 1)
+                                            @elseif($order->setting_id == 1)
                                                 <i class="mm-icon-17"></i>
                                             @endif
                                         </div>
 
                                         <div class="d-flex flex-column ms-1">
-                                            <small>{{ $order['service_name'] }}</small>
-                                            <span>{{ $order['id'] }}</span>
+                                            <small>{{ $order->setting->setting_name }}</small>
+                                            <span>{{ $order->ext_id }}</span>
                                         </div>
 
                                     </div>
 
                                 </th>
 
-                                <td>{{ $order['client_first_name'] }} {{ $order['client_last_name'] }}</td>
-                                <td>{{ $order['phone'] }}</td>
-                                <td><em>{{ $order['price'] }}</em></td>
-                                <td class="text-wrap">
-                                    {{ $order['payment_type'] }}
-                                    @if($order['payment'])
-                                        <br><em class="px-2 bg-success bg-opacity-50">Сплачено!</em>
-                                    @endif
+                                <td>
+                                    <div>
+                                        {{ $order->client->firstname }} {{ $order->client->lastname }}
+                                    </div>
+                                    <div>
+                                        {{ $order->client->phone }}
+                                    </div>
+
                                 </td>
-                                <td>{{ $order['created'] }}</td>
+
+                                <td style="max-width: 250px">{{ $order->recipient_address }}</td>
+
+                                <td>{{ $order->payment->name }}</td>
+
+                                <td class="text-wrap">
+                                    {{ $order->total . ' грн.' }}
+                                </td>
+
+                                <td>{{ $order->created_at }}</td>
+
                                 <td class="text-nowrap">
 
-                                    @if($order['service_id'] == 1)
-                                        <a href="/order.accept.site/{{ $order['id'] }}" class="btn btn-success btn-sm">
-                                            <i class="bi-check"></i>
-                                        </a>
-                                    @else
-                                        <a href="/order.accept.prom/{{ $order['api_id'] }}/{{ $order['id'] }}" class="btn btn-success btn-sm">
-                                            <i class="bi-check"></i>
-                                        </a>
-                                    @endif
-
+                                    <a href="{{ route('confirm.order', ['id' => $order->id]) }}" class="btn btn-success btn-sm">
+                                        <i class="bi-check"></i>
+                                    </a>
 
                                     <button class="btn btn-danger btn-sm">
                                         <i class="bi-x-circle"></i>
                                     </button>
                                 </td>
+
                             </tr>
                         @endforeach
 
