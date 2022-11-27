@@ -44,7 +44,7 @@ class AcceptPromController extends Controller
             'recipient_city_ref' => $order['order']['delivery_provider_data']['recipient_warehouse_id'],
             'recipient_address' => $order['order']['delivery_address'],
             'warehouse_type' => $order['order']['delivery_provider_data']['type'],
-            'payment' => $order['order']['payment_option']['name'],
+            'payment_id' => $request->payment_id,
             'total' => (float)str_replace(",",".", preg_replace("/[^,.0-9]/","",$order['order']['full_price'])),
             'status_id' => 1,
             'user_id' => auth()->user()->id,
@@ -61,8 +61,8 @@ class AcceptPromController extends Controller
 
         DB::commit();
 
-        dd($status);
+        //dd($status);
 
-        return to_route('/home');
+        return to_route('orders.accepted');
     }
 }

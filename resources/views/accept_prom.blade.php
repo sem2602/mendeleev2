@@ -51,6 +51,16 @@
                     <input type="text" name="order_id" value="{{ $order['id'] }}" hidden>
                     <input type="text" name="setting_id" value="{{ $order['setting_id'] }}" hidden>
 
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <select class="form-select" name="payment_id">
+                                @foreach($payments as $payment)
+                                    <option value="{{ $payment->id }}">{{ $payment->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Прийняти замовлення...</button>
 
                 </form>

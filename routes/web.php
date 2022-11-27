@@ -24,7 +24,7 @@ Route::middleware('auth')->group(callback: function (){
     Route::get('/orders/accepted', function() {
         $orders = \App\Models\Order::where('status_id', 1)->get();
         dd($orders);
-    });
+    })->name('orders.accepted');
 
     Route::post('/order.cancel/{id}/{service_id}', [\App\Http\Controllers\HomeController::class, 'cancelOrder']);
 });

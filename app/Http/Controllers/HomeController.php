@@ -83,6 +83,10 @@ class HomeController extends Controller
     private function convertOpencartOrder($order){
 
         $paymentType = explode(' ', $order['payment_method']);
+        foreach ($paymentType as $item){
+            $paymentString = $item . ' ';
+        }
+
 
         $blank = [
             'id' => $order['order_id'],
@@ -94,7 +98,7 @@ class HomeController extends Controller
             'email' => $order['email'],
             'phone' => $order['telephone'],
             'price' => (float)$order['total'] . ' грн',
-            'payment_type' => $paymentType[0] . ' ' . $paymentType[1],
+            'payment_type' => $paymentString,
             'payment' => false,
             'created' => date('d.m.Y h:i:s', strtotime($order['date_added'])),
         ];

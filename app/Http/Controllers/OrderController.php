@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Services\Prom;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Http\Request;
@@ -87,7 +88,8 @@ class OrderController extends Controller
 
         return view('accept_prom', [
             'order_title' => $api->setting_name,
-            'order' => $orderBlank
+            'order' => $orderBlank,
+            'payments' => Payment::all()
         ]);
 
 
