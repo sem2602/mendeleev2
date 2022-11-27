@@ -32,9 +32,9 @@
                                 <th scope="row">
                                     <div class="d-flex">
                                         <div>
-                                            @if($order->setting_id == 2)
+                                            @if($order->setting->service_id == 2)
                                                 <i class="prom-icon-17"></i>
-                                            @elseif($order->setting_id == 1)
+                                            @elseif($order->setting->service_id == 1)
                                                 <i class="mm-icon-17"></i>
                                             @endif
                                         </div>

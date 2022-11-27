@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Services\Prom;
+use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Settings;
@@ -27,13 +28,18 @@ class OrderController extends Controller
 
         $order = $prom->getOrder($order_id);
 
-        //dd($order);
+        $client = Client::where('phone', $order['order']['phone'])->first();
+
+        if(!$client){
+            $client['firstname'] = $order['order']['client_first_name'];
+            $client['lastname'] = $order['order']['client_last_name'];
+        }
 
         $orderBlank = [
             'id' => $order['order']['id'],
             'setting_id' => $api_id,
-            'client_first_name' => $order['order']['client_first_name'],
-            'client_last_name' => $order['order']['client_last_name'],
+            'client_first_name' => $client['firstname'],
+            'client_last_name' => $client['lastname'],
             'email' => $order['order']['email'],
             'phone' => $order['order']['phone'],
             'price' => $order['order']['full_price'],
