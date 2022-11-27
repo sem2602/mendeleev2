@@ -25,8 +25,7 @@ return new class extends Migration
             $table->string('recipient_city')->nullable();
             $table->text('recipient_address')->nullable();
             $table->string('warehouse_type')->nullable();
-            $table->string('payment')->nullable();
-            $table->string('payment_method')->nullable();
+            $table->foreignId('payment_id')->constrained('payments');
             $table->float('weight', 10, 3)->nullable();
             $table->float('seats', 10, 3)->nullable();
             $table->string('ttn')->nullable();
