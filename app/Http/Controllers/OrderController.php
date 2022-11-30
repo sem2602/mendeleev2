@@ -7,7 +7,6 @@ use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Settings;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {

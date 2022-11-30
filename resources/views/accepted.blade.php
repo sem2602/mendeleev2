@@ -10,7 +10,7 @@
 
             <div class="card-body">
 
-                @if(!empty($orders))
+                @if($orders->total() > 0)
                     <table class="table table-hover align-middle">
 
                         <thead class="table-info">

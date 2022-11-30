@@ -65,4 +65,5 @@ class AcceptPromController extends Controller
 
         return to_route('orders.accepted');
     }
+
 }
