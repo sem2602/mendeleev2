@@ -91,6 +91,10 @@
                     </div>
                 @endif
 
+                <div class="d-flex justify-content-center">
+                    {!! $orders->links() !!}
+                </div>
+
             </div>
         </div>
     </div>

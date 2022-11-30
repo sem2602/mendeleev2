@@ -54,11 +54,13 @@ class ClientController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        dd($id);
+
+        return view('client_edit', ['client' => Client::findOrFail($id)]);
+
     }
 
     /**
@@ -66,11 +68,21 @@ class ClientController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        Client::find($id)->update([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'middlename' => $request->middlename,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'organization' => $request->organization,
+            'edrpou' => $request->edrpou,
+        ]);
+
+        return to_route('clients.index');
     }
 
     /**

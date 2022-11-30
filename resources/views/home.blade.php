@@ -61,11 +61,11 @@
                             <td class="text-nowrap">
 
                                 @if($order['service_id'] == 1)
-                                    <a href="/order.accept.site/{{ $order['id'] }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('order.accept.site', $order['id']) }}" class="btn btn-success btn-sm">
                                         <i class="bi-check"></i>
                                     </a>
                                 @else
-                                    <a href="/order.accept.prom/{{ $order['api_id'] }}/{{ $order['id'] }}" class="btn btn-success btn-sm">
+                                    <a href="{{ route('order.accept.prom', [$order['api_id'], $order['id']]) }}" class="btn btn-success btn-sm">
                                         <i class="bi-check"></i>
                                     </a>
                                 @endif
