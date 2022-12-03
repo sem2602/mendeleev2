@@ -16,7 +16,7 @@ Route::middleware('auth')->group(callback: function (){
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
     Route::post('/settings.add', [SettingsController::class, 'insert'])->name('settings.add');
 
-    Route::get('/order/accept/site/{id}', [\App\Http\Controllers\OrderController::class, 'accept.site']);
+    Route::get('/order/accept/site/{id}', [\App\Http\Controllers\OrderController::class, 'acceptSite'])->name('order.accept.site');
 
     Route::get('/order/accept/prom/{api_id}/{order_id}', [\App\Http\Controllers\OrderController::class, 'acceptProm'])->name('order.accept.prom');
     Route::post('/order/prom/accept', AcceptPromController::class)->name('order.prom.accept');

@@ -6,7 +6,9 @@
     <div class="container">
 
         <div class="card shadow">
-            <div class="card-header">Налаштування</div>
+            <div class="card-header">
+                <h5 class="mt-2">Налаштування:</h5>
+            </div>
 
             @if ($errors->any())
                 <div class="alert alert-danger">

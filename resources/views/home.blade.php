@@ -6,7 +6,9 @@
 <div class="container">
 
     <div class="card shadow overflow-auto">
-        <div class="card-header">Замовлення з сайтів</div>
+        <div class="card-header">
+            <h5 class="mt-2">Замовлення з сайтів:</h5>
+        </div>
 
         <div class="card-body">
 
