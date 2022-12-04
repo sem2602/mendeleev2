@@ -50,23 +50,10 @@
                                     {{ $client->created_at }}
                                 </td>
 
-                                <td class="d-flex">
-
-                                    <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-secondary btn-sm me-1">
+                                <td class="">
+                                    <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-secondary btn-sm">
                                         <i class="bi-gear"></i>
                                     </a>
-
-{{--                                    <form action="{{ route('clients.destroy', $client->id) }}" method="POST">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-
-{{--                                        <button type="submit" class="btn btn-danger btn-sm">--}}
-{{--                                            <i class="bi-x-circle"></i>--}}
-{{--                                        </button>--}}
-
-{{--                                    </form>--}}
-
-
                                 </td>
 
                             </tr>

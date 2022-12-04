@@ -11,6 +11,11 @@ use App\Models\Settings;
 class OrderController extends Controller
 {
 
+    public function createOrder()
+    {
+        dd('create order');
+    }
+
     public function acceptSite($order_id)
     {
 
