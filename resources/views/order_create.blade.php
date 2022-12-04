@@ -20,29 +20,43 @@
 
 
 
-                <form action="{{ route('order.create') }}" method="POST">
+                <form action="{{ route('save.create.order') }}" method="POST">
 
                     @csrf
 
-                    <span class="text-danger">* </span>
-                    <span class="h4">Замовник:</span>
+                    <div class="row">
+
+                        <div class="col-md-6 border-start border-info">
+                            <span class="text-danger">* </span>
+                            <span class="h4">Замовник:</span>
+
+                            <input class="form-control mt-3" type="text" name="firstname" placeholder="Ім'я" required>
+                            <input class="form-control mt-3" type="text" name="lastname" placeholder="Прізвище" required>
+                            <input class="form-control mt-3" type="text" name="middlename" placeholder="По-батькові (необов'язково)">
+                            <input class="form-control mt-3" type="tel" name="phone" placeholder="+38000-000-00-00" required>
+                            <input class="form-control mt-3" type="email" name="email" placeholder="example@mail.com" required>
+
+                            <hr>
+
+                            <b>Для юридичних осіб (необов'язково)</b>
+                            <input class="form-control mt-3" type="text" name="organization" placeholder="Організація">
+                            <input class="form-control mt-3" type="number" name="edrpou" placeholder="ЕДРПОУ">
+                        </div>
+
+                        <div class="col-md-6 border-start border-info">
+                            <span class="text-danger">* </span>
+                            <span class="h4">Доставка:</span>
+
+                            <p class="mb-2"></p>
+                            <p class="mb-2"></p>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
                     <div class="p-3 mb-3">
-
-                        <input type="text" name="firstname" placeholder="">
-                        <input type="text" name="lastname" placeholder="">
-                        <input type="text" name="middlename" placeholder="">
-                        <input type="tel" name="phone" placeholder="">
-                        <input type="email" name="email" placeholder="">
-
-                        <hr>
-
-                        <strong>Доставка:</strong>
-                        <p class="mb-2"></p>
-                        <p class="mb-2"></p>
-
-                        <hr>
                         <p class="mb-2 p-3" style="background-color: #a9f8b4">Замовлення на суму: <em><b></b></em></p>
-
                     </div>
 
                     <div class="row mb-3">

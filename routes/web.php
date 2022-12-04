@@ -19,6 +19,7 @@ Route::middleware('auth')->group(callback: function (){
     Route::post('/settings.add', [SettingsController::class, 'insert'])->name('settings.add');
 
     Route::get('/orders/create', [OrderController::class, 'createOrder'])->name('create.order');
+    Route::post('/orders/create', [OrderController::class, 'saveCreateOrder'])->name('save.create.order');
 
     Route::get('/order/accept/site/{id}', [OrderController::class, 'acceptSite'])->name('order.accept.site');
 

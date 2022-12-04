@@ -7,13 +7,19 @@ use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Settings;
+use http\Env\Request;
 
 class OrderController extends Controller
 {
 
     public function createOrder()
     {
-        dd('create order');
+        return view('order_create', ['payments' => Payment::all()]);
+    }
+
+    public function saveCreateOrder(Request $request)
+    {
+        dd($request);
     }
 
     public function acceptSite($order_id)
