@@ -14,7 +14,10 @@ class OrderController extends Controller
 
     public function createOrder()
     {
-        return view('order_create', ['payments' => Payment::all()]);
+        return view('order_create', [
+            'client' => null,
+            'payments' => Payment::all()
+        ]);
     }
 
     public function saveCreateOrder(Request $request)
