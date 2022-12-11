@@ -2,6 +2,7 @@
 
     <input class="form-control mt-3" type="text" name="firstname" placeholder="Ім'я" value="{{ $firstname }}" required>
 
+
     <input wire:model="search" class="form-control mt-3" type="text" name="lastname" placeholder="Прізвище" value="{{ $lastname }}" required>
     <div class="position-absolute list-group bg-light w-100 mt-1" {{ $show }}>
         @foreach($clients as $client)
