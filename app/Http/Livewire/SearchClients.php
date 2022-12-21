@@ -7,20 +7,20 @@ use Livewire\Component;
 
 class SearchClients extends Component
 {
-    public $search = '';
-    public $client_id;
-    public $firstname;
-    public $lastname;
-    public $middlename;
-    public $phone;
-    public $email;
-    public $organization;
-    public $edrpou;
-    public $show = 'hidden';
-    public $check = [];
-    public $click = false;
+    public string $search = '';
+    public int $client_id;
+    public string|null $firstname;
+    public string|null $lastname;
+    public string|null $middlename;
+    public string|null $phone;
+    public string|null $email;
+    public string|null $organization;
+    public string|null $edrpou;
+    public string $show = 'hidden';
+    public array $check = [];
+    public bool $click = false;
 
-    public function render()
+    public function render(): object
     {
 
         if(!empty($this->search) && !$this->click){
@@ -35,11 +35,12 @@ class SearchClients extends Component
         ]);
     }
 
-    public function apply($client_id)
+    public function apply($client_id): void
     {
 
         $this->click = true;
         $this->show = 'hidden';
+        $this->reset('search');
 
         $client = Client::find($client_id);
 

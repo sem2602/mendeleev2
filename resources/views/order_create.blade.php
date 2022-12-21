@@ -46,19 +46,24 @@
 
                     <hr>
 
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="input-group">
+                                <label class="input-group-text">Тип розрахунку:</label>
+                                <select class="form-select" name="payment_id">
+                                    @foreach($payments as $payment)
+                                        <option value="{{ $payment->id }}">{{ $payment->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="p-3 mb-3">
                         <p class="mb-2 p-3" style="background-color: #a9f8b4">Замовлення на суму: <em><b></b></em></p>
                     </div>
 
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            <select class="form-select" name="payment_id">
-                                @foreach($payments as $payment)
-                                    <option value="{{ $payment->id }}">{{ $payment->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+
 
                     <button type="submit" class="btn btn-success">Прийняти замовлення...</button>
 
