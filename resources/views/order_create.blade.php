@@ -24,15 +24,9 @@
 
                     @csrf
 
-                    <div class="row">
+                    <div class="row mb-3">
 
-                        <div class="col-md-6 border-start border-info">
-                            <span class="text-danger">* </span>
-                            <span class="h4">Замовник:</span>
-
-                            @livewire('search-clients')
-
-                        </div>
+                        @livewire('search-clients')
 
                         <div class="col-md-6 border-start border-info">
                             <span class="text-danger">* </span>
@@ -47,7 +41,7 @@
                     <hr>
 
                     <div class="row mb-3">
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="input-group">
                                 <label class="input-group-text">Тип розрахунку:</label>
                                 <select class="form-select" name="payment_id">
@@ -59,7 +53,7 @@
                         </div>
                     </div>
 
-                    <div class="p-3 mb-3">
+                    <div class="mb-3">
                         <p class="mb-2 p-3" style="background-color: #a9f8b4">Замовлення на суму: <em><b></b></em></p>
                     </div>
 
