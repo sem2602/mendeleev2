@@ -32,7 +32,24 @@
                             <span class="text-danger">* </span>
                             <span class="h4">Доставка:</span>
 
-                            <p class="mb-2"></p>
+                            <div class="form-check-inline ms-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <i class="novaposhta-icon"></i>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <i class="ukrposhta-icon"></i>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                    <i class="justin-icon"></i>
+                                </div>
+                            </div>
+
+
+
+
                             <p class="mb-2"></p>
                         </div>
 
