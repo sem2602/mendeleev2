@@ -21,24 +21,24 @@
 
                             <div class="mb-3">
                                 <label class="form-label"><b>Ім'я:</b></label>
-                                <input name="firstname" type="text" class="form-control" placeholder="і'мя" value="{{ $client->firstname }}">
+                                <input name="firstname" type="text" class="form-control" placeholder="і'мя" value="{{ $client->firstname }}" required>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label"><b>Прізвище:</b></label>
-                                <input name="lastname" type="text" class="form-control" placeholder="прізвище" value="{{ $client->lastname }}">
+                                <input name="lastname" type="text" class="form-control" placeholder="прізвище" value="{{ $client->lastname }}" required>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label"><b>По-батькові:</b></label>
-                                <input name="midlename" type="text" class="form-control" placeholder="по-батькові" value="{{ $client->midlename }}">
+                                <input name="midlename" type="text" class="form-control" placeholder="по-батькові" value="{{ $client->middlename }}">
                             </div>
 
                             <hr>
 
                             <div class="mb-3">
                                 <label class="form-label"><b>Email адреса:</b></label>
-                                <input name="email" type="email" class="form-control" placeholder="name@example.com" value="{{ $client->email }}">
+                                <input name="email" type="email" class="form-control" placeholder="name@example.com" value="{{ $client->email }}" required>
                             </div>
 
                             <div class="mb-3">
