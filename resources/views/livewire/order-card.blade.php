@@ -21,36 +21,13 @@
             <div class="col-md-6 border-start border-info mb-3">
 
                 @if($payment_id == 1 || $payment_id == 2)
-                    <span class="text-danger">* </span>
-                    <span class="h4">Доставка:</span>
-
-                    <div class="form-check-inline ms-3">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                            <i class="novaposhta-icon"></i>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                            <i class="ukrposhta-icon"></i>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input my-2" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                            <i class="justin-icon"></i>
-                        </div>
-                    </div>
+                    @livewire('delivery')
                 @else
                     <div class="row h-75 justify-content-center align-items-center">
                         <img src='{{ asset('build/assets/delivery.png') }}' class="w-50">
                     </div>
                 @endif
 
-
-
-
-
-
-
-                <p class="mb-2"></p>
             </div>
 
         </div>
