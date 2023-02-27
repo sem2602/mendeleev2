@@ -1,5 +1,4 @@
-<div class="col-md-6 border-start border-info mb-3">
-
+<div>
     <div class="row align-items-center">
 
         <div class="col">
@@ -32,8 +31,6 @@
         <input class="form-control mt-2" type="number" name="edrpou" placeholder="ЕДРПОУ" value="{{ $edrpou }}">
 
     </div>
-
 </div>
-
 
 
