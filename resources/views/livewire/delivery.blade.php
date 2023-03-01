@@ -34,9 +34,27 @@
         </select>
     </div>
 
+{{--    @json($show)--}}
+
 
     @if($delivery_method == 1)
-        <input class="form-control mt-2" type="text" name="city" placeholder="Місто доставки..." value="" required>
+        <div class="position-relative">
+            <input wire:model="search" wire:focus="showCityList" class="form-control mt-2" type="text" name="city" placeholder="Місто доставки..." value="" required>
+            <input type="text" name="city_ref" value="{{ $cityRef }}" hidden>
+
+            <div class="position-absolute list-group bg-light w-100 m-1" {{ $show }}>
+                @foreach($cities as $city)
+                    <button wire:click="select('{{$city['Ref']}}', '{{$city['Present']}}')" type="button" class="list-group-item list-group-item-action bg-secondary bg-opacity-25">{{ $city['Present'] }}</button>
+                @endforeach
+            </div>
+
+        </div>
+
+        <select class="form-select mt-2" name="warehouse_ref" {{$showList}} required>
+            @foreach($warehouses as $warehouse)
+                <option value="{{ $warehouse['Ref'] }}">{{ $warehouse['Description'] }}</option>
+            @endforeach
+        </select>
     @else
         2
     @endif

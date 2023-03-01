@@ -24,6 +24,14 @@ class NovaPoshta
         ]);
     }
 
+    public function getWarehouses($cityRef): array
+    {
+        return $this->sendQuery('Address', 'getWarehouses', [
+//            "CityName" => $city,
+            "SettlementRef" => $cityRef,
+        ]);
+    }
+
 
 
 
