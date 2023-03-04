@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Http\Controllers\Services\NovaPoshta;
+use App\Http\Controllers\Services\Ukrpost;
 use App\Models\DeliveryProvider;
 use App\Models\Settings;
 use Livewire\Component;
@@ -38,17 +39,23 @@ class Delivery extends Component
     public function render(): object
     {
 
-        $np = new NovaPoshta($this->np_api);
+        $clients = match ($this->delivery_provider) {
+            1 => $this->getNovaPoshtaCities(),
+            2 => $this->getUkrpostCities(),
+            3 => 'justin',
+            default => throw new \Exception('Unexpected match value'),
+        };
 
-        $cities = $np->searchCity($this->search);
+        //dd($clients);
 
-        //dd($cities);
 
-        if(!$cities['success']){
-            $cities['data'][0]['Addresses'] = [];
-        }
 
-        return view('livewire.delivery', ['cities' => $cities['data'][0]['Addresses']]);
+        return view('livewire.delivery', ['cities' => $clients]);
+    }
+
+    public function refresh(): void
+    {
+        $this->reset('search', 'warehouses', 'show', 'showList');
     }
 
     public function showCityList()
@@ -66,15 +73,82 @@ class Delivery extends Component
 
         $this->showList = '';
 
+        $this->warehouses = match ($this->delivery_provider) {
+            1 => $this->getNovaPoshtaWarehouses($city_ref),
+            2 => $this->getUkrpostWarehouses($city_ref),
+            3 => [],//'justin'
+            default => throw new \Exception('Unexpected match value'),
+        };
+
+    }
+
+    private function getNovaPoshtaCities(): array
+    {
+        $np = new NovaPoshta($this->np_api);
+
+        $cities = $np->searchCity($this->search);
+
+        //dd($cities);
+
+        if(!$cities['success']){
+            $cities['data'][0]['Addresses'] = [];
+        }
+        $data = [];
+        foreach ($cities['data'][0]['Addresses'] as $key =>$city){
+            $data[$key]['city'] = $city['Present'];
+            $data[$key]['city_ref'] = $city['Ref'];
+        }
+
+        return $data;
+
+    }
+
+    private function getNovaPoshtaWarehouses($city_ref): array
+    {
         $np = new NovaPoshta($this->np_api);
         $data = $np->getWarehouses($city_ref);
 
         if($data['success']){
-            $this->warehouses = $data['data'];
+            return $data['data'];
         }
 
-        //dd($data);
+        return [];
+    }
 
+    private function getUkrpostCities(): array
+    {
+        $ukrpost = new Ukrpost($this->bearer, $this->token);
+        if (!empty($this->search)){
+            $cities = $ukrpost->getCitiesLikeName($this->search);
+        } else {$cities = [];}
+
+        $data = [];
+        if(!empty($cities['data']['cities'])){
+            foreach ($cities['data']['cities'] as $key => $city){
+                $data[$key]['city'] = $city['text'];
+                $data[$key]['city_ref'] = $city['value'];
+                if($key > 9){break;}
+            }
+        }
+
+        return $data;
 
     }
+
+    private function getUkrpostWarehouses($city_ref): array
+    {
+        $ukrpost = new Ukrpost($this->bearer, $this->token);
+        $warehouses = $ukrpost->getDepByCityRef($city_ref);
+        //dd($data);
+
+        $data = [];
+        if(!empty($warehouses['data']['warehouses'])){
+            foreach ($warehouses['data']['warehouses'] as $key => $warehouse){
+                $data[$key]['Description'] = $warehouse['text'];
+                $data[$key]['Ref'] = $warehouse['value'];
+            }
+        }
+        return $data;
+    }
+
 }
